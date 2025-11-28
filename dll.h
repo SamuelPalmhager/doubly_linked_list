@@ -1,18 +1,17 @@
 #ifndef _DOUBLY_LINKED_LIST_
 #define _DOUBLY_LINKED_LIST_
 
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct dll_node_{
-
-    int data;
-    dll_node_ *next;
-    dll_node_ *prev;
-
+    void* data;
+    struct dll_node_ *next;
+    struct dll_node_ *prev;
 }dll_node_t;
 
 typedef struct dll_{
-
     dll_node_t *head;
-
 }dll_t;
 
 
