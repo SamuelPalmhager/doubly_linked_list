@@ -11,12 +11,12 @@ int main(){
     dll_node_t *node1 = calloc(1, sizeof(dll_node_t));
 
     node1->data = 10;
-    node1->next = nullptr;
-    node1->prev = nullptr;
+    node1->next = NULL;
+    node1->prev = NULL;
 
-    dll_node_t *node2 = new dll_node_t;
+    dll_node_t *node2 = calloc(1, sizeof(dll_node_t));
     node2->data = 20;
-    dll_node_t *node3 = new dll_node_t;
+    dll_node_t *node3 = calloc(1, sizeof(dll_node_t));
     node3->data = 30;
 
     add_data_to_dll(dll, node1);
@@ -25,9 +25,9 @@ int main(){
 
     print_dll(dll);
 
-    delete node1;
-    delete node2;
-    delete node3;
+    free(node1);
+    free(node2);
+    free(node3);
 
     return 0;
 };

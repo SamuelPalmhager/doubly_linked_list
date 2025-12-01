@@ -14,10 +14,6 @@ dll_t* get_new_dll(){
 int add_data_to_dll(dll_t* dll, void* app_data){
 
     //We need to check if we should add in the beginning or end of the list
-    
-    //if(!dll || !dll->head) return 1;
-
-      //Assign to heads next node
 
         dll_node_t *new_node = calloc(1, sizeof(dll_node_t));
         new_node->next = NULL;
@@ -37,7 +33,6 @@ int add_data_to_dll(dll_t* dll, void* app_data){
         temp = dll->head;
 
         while(temp->next != NULL){
-            //printf("Stepping in %d", i);
             temp = temp->next;
         }
 
@@ -60,10 +55,10 @@ void print_dll(dll_t* dll){
     int i = 0;
 
     while(temp != NULL){
-        printf("Data for node: %d, is %d", i, (int)(temp->data));
+        printf("Data for node: %d, is %d \n", i, (int)(temp->data));
         temp = temp->next;
         i++;
     }
-    printf("Reached end of dll");
+    printf("Reached end of dll \n");
 
 }

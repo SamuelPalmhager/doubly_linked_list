@@ -34,5 +34,30 @@ int add_data_to_dll(dll_t* dll, void* app_data);
 /**
  * Function to print dll
  */
+
 void print_dll(dll_t* dll);
+
+/**
+ * Function to remove data in a node from dll
+ * @param dll pointer to dll on which to perform deletion. @param app_data the contents of the node which to remove
+ * @return will return 0 if successful, or -1 if not successful. 
+ */
+
+int remove_data_from_dll(dll_t* dll, void* app_data);
+
+/**
+ * Function to check if a dll is empty
+ * @param dll pointer to dll which to check if empty
+ * @return will return 0 if empty, or -1 if not empty. 
+ */
+
+int is_dll_empty(dll_t* dll);
+
+/**
+ * Function to delete all nodes from a dll, but wont free the appln data
+ * @param dll pointer to dll which to drain
+ */
+
+void drain_dll(dll_t* dll);
+
 #endif //_DOUBLY_LINKED_LIST_

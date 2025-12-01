@@ -27,7 +27,7 @@ static void print_bankaccount_db(dll_t* account_db){
     dll_node_t *temp = account_db->head;
     bankaccount_t *data = NULL;
 
-    while(temp->next != NULL){
+    while(temp){
         data = temp->data;
         print_bankaccount_details(data);
         temp = temp->next;
@@ -55,6 +55,12 @@ int main(int argc, char** argv){
     strncpy(account3->owner, "Elias", strlen("Elias"));
     printf("Created account3 with %s as name \n", account3->owner);
 
+    bankaccount_t *account4 = calloc(1, sizeof(bankaccount_t));
+    account4->balance = 400.1234;
+    account4->account_id = 4;
+    strncpy(account4->owner, "Elli", strlen("Elli"));
+    printf("Created account4 with %s as name \n", account4->owner);
+
     dll_t *dll = get_new_dll();
 
     add_data_to_dll(dll, account1);
@@ -62,6 +68,17 @@ int main(int argc, char** argv){
     add_data_to_dll(dll, account3);
 
     print_bankaccount_db(dll);
-    
+
+    printf("Is DLL empty? %d \n", is_dll_empty(dll));
+
+    remove_data_from_dll(dll, account2);
+    remove_data_from_dll(dll, account4);
+
+    print_bankaccount_db(dll);
+
+    drain_dll(dll);
+
+    print_dll(dll);
+
     return 0;
 };
