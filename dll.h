@@ -12,6 +12,8 @@ typedef struct dll_node_{
 
 typedef struct dll_{
     dll_node_t *head;
+    int (*key_match)(void*, void*); 
+    int (*comp_match)(void*, void*);
 }dll_t;
 
 
@@ -59,5 +61,30 @@ int is_dll_empty(dll_t* dll);
  */
 
 void drain_dll(dll_t* dll);
+
+
+/**
+* Function to register a callback
+* @param dll dll to search through, @param int method signature for the search function to register
+*/
+
+void register_key_match_callback(dll_t *dll, int (*key_match)(void*, void*));
+
+
+/**
+* Function to search the dll and return 
+*/
+
+void* dll_search_by_key(dll_t *dll, void *key);
+
+
+/**
+* Function to register comparison method callback 
+* @param dll dll to register the callback on, @param int method signature for the comparison function to register 
+*/
+
+void register_comp_callback(dll_t *dll, int (*comp_match)(void*, void*));
+
+int dll_priority_insert_data(dll_t*, void*);
 
 #endif //_DOUBLY_LINKED_LIST_

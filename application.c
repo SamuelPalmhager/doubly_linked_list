@@ -34,6 +34,29 @@ static void print_bankaccount_db(dll_t* account_db){
     }
 };
 
+static int match_bankaccount_key(void* data, void* key){
+
+    bankaccount_t *acc = (bankaccount_t*)data;
+    unsigned int rollno = (unsigned int)key;
+
+    if(acc->account_id == key) return 0;
+
+    return -1;
+};
+
+static int bankaccount_comparison_fn(void* app_data1, void* app_data2){
+
+    bankaccount_t *acc1 = (bankaccount_t*) app_data1;
+    bankaccount_t *acc2 = (bankaccount_t*) app_data2;
+
+    if(acc1->balance == acc2->balance) return 0;
+    if(acc1->balance > acc2->balance){
+        return 1;
+    }else 
+    return -1;
+
+};
+
 int main(int argc, char** argv){
 
     bankaccount_t *account1 = calloc(1, sizeof(bankaccount_t));
@@ -61,7 +84,16 @@ int main(int argc, char** argv){
     strncpy(account4->owner, "Elli", strlen("Elli"));
     printf("Created account4 with %s as name \n", account4->owner);
 
+    bankaccount_t *account5 = calloc(1, sizeof(bankaccount_t));
+    account5->balance = 450.1234;
+    account5->account_id = 5;
+    strncpy(account5->owner, "Bengt", strlen("Bengt"));
+    printf("Created account5 with %s as name \n", account5->owner);
+
     dll_t *dll = get_new_dll();
+
+    register_key_match_callback(dll, match_bankaccount_key);
+    register_comp_callback(dll, bankaccount_comparison_fn);
 
     add_data_to_dll(dll, account1);
     add_data_to_dll(dll, account2);
@@ -73,12 +105,15 @@ int main(int argc, char** argv){
 
     remove_data_from_dll(dll, account2);
     remove_data_from_dll(dll, account4);
+    printf("Searching for %s, search was %s successful \n", account4->owner, dll_search_by_key(dll, (void*)(4)) == 0 ? "" : "not");
+
+    dll_priority_insert_data(dll, account5);
 
     print_bankaccount_db(dll);
 
     drain_dll(dll);
 
-    print_dll(dll);
+    //print_dll(dll);
 
     return 0;
 };
